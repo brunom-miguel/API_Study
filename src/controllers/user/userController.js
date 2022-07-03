@@ -19,14 +19,14 @@ function generateAuthorizationToken(params = {}) {
 router.post('/register', async (req, res) => {
     try {
         // verificação se existe usuário
-        const { email } = req.body;
+        const { email, cpf } = req.body;
 
-        if (await User.findOne({ email }))
-            return res.status(400).send({ error: 'Email already exists' });
+        if (await User.findOne({ email }) ||
+            await User.findOne({ cpf }))
+            return res.status(400).send({ error: 'User already exists' });
         
         // criando usuário
         const user = await User.create(req.body);
-        user.password = undefined;
 
         return res.send({
             user
