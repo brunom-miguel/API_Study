@@ -46,12 +46,10 @@ router.post('/authenticate', async (req, res) => {
     if (!await bcrypt.compare(password, user.password)) 
         return res.status(400).send({ error: 'Password mismatch' })
 
-    user.password = undefined
-
     res.send({
         user,
         token: generateAuthorizationToken({ id: user.id })
     })
 })
 
-module.exports = app => app.use('/auth', router)
+module.exports = app => app.use('/auth/users', router)

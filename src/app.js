@@ -9,5 +9,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 require('./controllers/user/userController')(app);
 require('./controllers/user/requireAuthUserController')(app);
+require('./controllers/product/productController')(app);
 
 app.listen(PORT, () => console.log(`Listening at http://localhost:${PORT}`))
